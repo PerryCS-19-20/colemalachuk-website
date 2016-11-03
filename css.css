@@ -1,0 +1,33 @@
+/* css.css */
+p.times {font-family: "Times New Roman", Times;}
+p, a, ul, ol, table, center  {font-family: Helvetica; font-size:110%; color:white;}
+h1 {font-family: Helvetica; font-size:210%;}
+h3 {font-family: Helvetica; font-size:130%;}
+code {font-size:130%;}
+span.red {color: red;}
+span.blue {color: blue;}
+span.green {color: green;}
+a:link    {color:darkorange; background-color:transparent; text-decoration:none}
+a:visited {color:white; background-color:transparent; text-decoration:none}
+a:hover   {color:red; background-color:transparent; text-decoration:underline}
+a:active  {color:green; background-color:transparent; text-decoration:none}
+.center {margin: auto;}
+
+
+/* table styles */
+table {border-collapse: collapse;width: 100%;background-color:#808080;}
+table, td, th {border: 1px solid white;}
+th {height: 50px;font-size:150%;text-decoration:none}
+tr:nth-child(even) {background: #808080}
+tr:nth-child(odd) {background: #a6a6a6}
+
+
+/* title styles */
+#title {
+    border: 0px solid yellow;
+    width: center;
+    height: 100px;
+    -webkit-animation: title 15s infinite; 
+
+}
+@-webkit-keyframes title {50% {font: 40px bold;}}
