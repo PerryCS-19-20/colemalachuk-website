@@ -14,6 +14,15 @@ a:active  {color:green; background-color:transparent; text-decoration:none}
 .center {margin: auto;}
 
 
+#bg {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+    height: 2880px; background: linear-gradient(to left, #800000, #ffff00, #a3f5a3);}
+
+
+
 /* title styles */
 #title {
     border: 0px solid yellow;
