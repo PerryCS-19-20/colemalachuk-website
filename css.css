@@ -1,6 +1,6 @@
 /* css.css */
 p.times {font-family: "Times New Roman", Times;}
-p, a, ul, ol, table, center  {font-family: Helvetica; font-size:110%; color:white;}
+p, a, ul, ol, table, center  {font-family: Helvetica; font-size:110%; color:black;}
 h1 {font-family: Helvetica; font-size:210%; color:black;}
 h3 {font-family: Helvetica; font-size:130%;}
 code {font-size:130%;}
