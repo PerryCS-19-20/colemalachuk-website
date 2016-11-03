@@ -15,10 +15,6 @@ a:active  {color:green; background-color:transparent; text-decoration:none}
 
 
 #bg {
-    margin-top: 1px;
-    margin-bottom: 1px;
-    margin-right: 1px;
-    margin-left: 1px;
     height: 2880px; background: linear-gradient(to left, #800000, #ffff00, #a3f5a3);}
 
 
