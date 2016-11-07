@@ -14,12 +14,13 @@ a:active  {color:green; background-color:transparent; text-decoration:none}
 .center {margin: auto;}
 
 
-#bg {height: 2880px; background: linear-gradient(to left, #800000, #ffff00, #a3f5a3);}
+
 
 
 
 /* title styles */
 #title {
+    border: 0px solid yellow;
     width: center;
     height: 100px;
     -webkit-animation: title 15s infinite; 
