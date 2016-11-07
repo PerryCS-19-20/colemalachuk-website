@@ -20,7 +20,6 @@ a:active  {color:green; background-color:transparent; text-decoration:none}
 
 /* title styles */
 #title {
-    border: 0px solid yellow;
     width: center;
     height: 100px;
     -webkit-animation: title 15s infinite; 
