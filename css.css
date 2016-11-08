@@ -8,7 +8,7 @@ span.red {color: red;}
 span.blue {color: blue;}
 span.green {color: green;}
 a:link    {color:darkorange; background-color:transparent; text-decoration:none}
-a:visited {color:white; background-color:transparent; text-decoration:none}
+a:visited {color:brown; background-color:transparent; text-decoration:none}
 a:hover   {color:red; background-color:transparent; text-decoration:underline}
 a:active  {color:green; background-color:transparent; text-decoration:none}
 .center {margin: auto;}
