@@ -7,28 +7,23 @@
     <title>JavaScript Color Change</title>
     <script>
         function cc(c) {
-            if (c == 1) {
-                document.body.style.backgroundColor = Green;
-            } else if (c == 2) {
-                document.body.style.backgroundColor = Blue;
-            } else  if (c == 3) {
-                document.body.style.backgroundColor = Orange;
-            } else if (c == 4) {
-                document.body.style.backgroundColor = Yellow;
-            } else if (c == 5) {
-                document.body.style.backgroundColor = Red;
-            } else if (c == 6) {
-                document.body.style.backgroundColor = Purple;
-            }
-            
-            
+            document.body.style.backgroundColor = c;
         }
     </script>
     <style>
     </style>
 </head>
 <body>
-    <span onmouseover="cc(1)">C</span>o</span><span  onmouseover="cc(1)">l</span><span  onmouseover="cc(1)">o</span><span  onmouseover="cc(1)">r</span><span  onmouseover="cc(1)">s</span>
+        <h1>
+            <span onmouseover="cc('Green')">C</span>o</span>
+            <span onmouseover="cc('Blue')">l</span>
+            <span onmouseover="cc('Orange')">o</span>
+            <span onmouseover="cc('Yellow')">r</span>
+            <span onmouseover="cc('Red')">s</span>
+        </h1>
+    <div onmouseover="cc('White')">
+        <br><br><br>
+    </div>
     <a href="../index.html">Return Home</a>
 </body>
 </html>
