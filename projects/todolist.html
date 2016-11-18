@@ -2,20 +2,38 @@
     <head>
         <title>To Do List</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="css.css">
+        <link rel="stylesheet" type="text/css" href="../css.css">
         <script>
             function add() {
-                var input = document.getElementById("inputText");
-                var spam = document.getElementById("spam");
-                spam.textContent = input.value;
+                var list = document.getElementById("list");
+                var item = document.createElement("li");
+                var text = document.getElementById("inputText").value;
+                item.textContent = text;
+                list.appendChild(item);
             }
         </script>
     </head>
     <body>
-        <h1>INCOMPLETE</h1>
+    <div id="navbar">
+<ul class="nav" id="top">
+    <li class="nav"><a class="active" href="#top">Home</a></li>
+    <li class="dropdown">
+    <a href="#proj" class="dropbtn">Projects</a>
+    <div class="dropdown-content">
+        <a href="projects/breakout.html">Breakout</a>
+        <a href="projects/popup.html">Popup</a>
+        <a href="projects/crazyball.html">Crazy Ball</a>
+        <a href="projects/js-colorchange.html">JavaScript Color Change</a>
+        <a href="projects/htmltest.html">HTML Test</a>
+        <a href="projects/todolist.html">To Do List</a>
+    </div>
+  </li>
+    <li class="nav"><a href="bio.html">About</a></li>
+</ul>
+</div>
         <textarea rows="10" cols="80" id="inputText">Input something to add to the list</textarea>
         <button onclick="add();">Add</button>
         <br>
-        <span id="spam"> </span>
+        <ul id="list"> </ul>
     </body>
 </html>
