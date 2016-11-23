@@ -1,6 +1,8 @@
 var player = 1;
+var winners = 0;
 
 function move(box) {
+    if(winners == 0) {
     var cell = document.getElementById(box);
     if(cell.textContent === "") {
         if(player === 1) {
@@ -25,7 +27,7 @@ function move(box) {
         var cell = document.getElementById("message");
         cell.textContent = text;
     }
-    
+    }
 }
 
 
@@ -74,4 +76,5 @@ function move(box) {
         var text = xory + " won!";
         var cell = document.getElementById("message");
         cell.textContent = text;
+        winners = 1;
  }
