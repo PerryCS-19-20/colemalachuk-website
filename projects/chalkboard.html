@@ -1,13 +1,17 @@
 <html>
     <head>
-        <title>HTML Test</title>
+        <title>Chalkboard</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="../css.css">
         <script>
-            function test() {
-                var input = document.getElementById("inputText");
-                var spam = document.getElementById("spam");
-                spam.innerHTML = input.value;
+            function add() {
+                for(var i = 0; i < 100; i++){
+                    var list = document.getElementById("list");
+                    var item = document.createElement("li");
+                    var text = document.getElementById("inputText").value;
+                    item.textContent = text;
+                    list.appendChild(item);
+                }
             }
         </script>
     </head>
@@ -32,10 +36,9 @@
 </ul>
 </div>
 
-        
-        <textarea rows="10" cols="80" id="inputText">Input HTML to test here</textarea>
-        <button onclick="test();">Test it!</button>
+        <textarea rows="10" cols="80" id="inputText">Input something to write 100 times</textarea>
+        <button onclick="add();">Add</button>
         <br>
-        <span id="spam"> </span>
+        <ul id="list"> </ul>
     </body>
 </html>
