@@ -47,6 +47,9 @@ function move(box) {
      if (("" != c1) && (c1 === c2) && (c2 === c3)) {
          console.log("row 1 won");
          winner(c1);
+         c1.style.color = "red";
+         c2.style.color="red";
+         c3.style.color="red";
      } else if (("" !== c4) && (c4 === c5) && (c5 === c6)) {
          console.log("row 2 won");
          winner(c4);
