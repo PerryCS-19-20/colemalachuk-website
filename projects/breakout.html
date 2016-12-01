@@ -2,298 +2,299 @@
 
 <!doctype html>
 <html>
-	<head>
-            <link rel="stylesheet" type="text/css" href="../css.css">
-		<title>Breakout</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-		<script type="text/javascript" src="https://static.codehs.com/gulp/cb01b4a22ffd3971572a8a1ab9f3b7c4cb17f383/chs-js-lib/chs.js"></script>
-		<script>
-                      window.onload = function() {
-/* Constants for bricks */
-var NUM_ROWS = 8;
-var NUM_BRICKS_PER_ROW = 10;
-var BRICK_TOP_OFFSET = 10;
-var BRICK_SPACING = 2;
-var BRICK_HEIGHT = 10;
-var SPACE_FOR_BRICKS = getWidth() - (NUM_BRICKS_PER_ROW + 1) * BRICK_SPACING;
-var BRICK_WIDTH = SPACE_FOR_BRICKS / NUM_BRICKS_PER_ROW;
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css.css">
+        <title>Breakout</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://static.codehs.com/gulp/cb01b4a22ffd3971572a8a1ab9f3b7c4cb17f383/chs-js-lib/chs.js"></script>
+        <script>
+            window.onload = function() {
+                /* Constants for bricks */
+                var NUM_ROWS = 8;
+                var NUM_BRICKS_PER_ROW = 10;
+                var BRICK_TOP_OFFSET = 10;
+                var BRICK_SPACING = 2;
+                var BRICK_HEIGHT = 10;
+                var SPACE_FOR_BRICKS = getWidth() - (NUM_BRICKS_PER_ROW + 1) * BRICK_SPACING;
+                var BRICK_WIDTH = SPACE_FOR_BRICKS / NUM_BRICKS_PER_ROW;
 
-var NUM_ROWS_COLOR = NUM_ROWS/2;
-var jeff = BRICK_SPACING + BRICK_HEIGHT;
+                var NUM_ROWS_COLOR = NUM_ROWS / 2;
+                var jeff = BRICK_SPACING + BRICK_HEIGHT;
 
-/* Constants for ball and paddle */
-var PADDLE_WIDTH = 80;
-var PADDLE_HEIGHT = 15;
-var PADDLE_OFFSET = 10;
-var BALL_RADIUS = 15;
-var ball;
-ball = new Circle(BALL_RADIUS);
-var running = true;
-var dx = 4;
-var dy = 4;
-var paddle = new Rectangle(PADDLE_WIDTH, PADDLE_HEIGHT);
+                /* Constants for ball and paddle */
+                var PADDLE_WIDTH = 80;
+                var PADDLE_HEIGHT = 15;
+                var PADDLE_OFFSET = 10;
+                var BALL_RADIUS = 15;
+                var ball;
+                ball = new Circle(BALL_RADIUS);
+                var running = true;
+                var dx = 4;
+                var dy = 4;
+                var paddle = new Rectangle(PADDLE_WIDTH, PADDLE_HEIGHT);
 
 // score
-var ballFalls = 0;
-var disableFalls = 0;
-var score = 0;
-var timeSpeed = 20;
-var easyMode = false;
+                var ballFalls = 0;
+                var disableFalls = 0;
+                var score = 0;
+                var timeSpeed = 20;
+                var easyMode = false;
 
 // text lines
-var lose = new Text("You Lost! :(", "32pt Arial");
-lose.setPosition(100, 200);
-lose.setColor(Color.red);
-var win = new Text("You Win! :)", "30pt Arial");
-win.setPosition(100, 200);
-win.setColor(Color.green);
-var sc = new Text("Score: " + score, "24pt Arial");
-var setupInfo = new Text("Press 1 for slow, 2 for medium, 3 for fast,", "14pt Arial");
-var setupInfo2 = new Text("4 for very fast, 5 for extreme, 6 for immposible", "14pt Arial");
+                var lose = new Text("You Lost! :(", "32pt Arial");
+                lose.setPosition(100, 200);
+                lose.setColor(Color.red);
+                var win = new Text("You Win! :)", "30pt Arial");
+                win.setPosition(100, 200);
+                win.setColor(Color.green);
+                var sc = new Text("Score: " + score, "24pt Arial");
+                var setupInfo = new Text("Press 1 for slow, 2 for medium, 3 for fast,", "14pt Arial");
+                var setupInfo2 = new Text("4 for very fast, 5 for extreme, 6 for immposible", "14pt Arial");
 
-function start(){
-    setupGame();
-}
+                function start() {
+                    setupGame();
+                }
 
-function resume() {
-    if (!running) {
-        setTimer(draw, timeSpeed);
-        running = true;
-    }
-}
+                function resume() {
+                    if (!running) {
+                        setTimer(draw, timeSpeed);
+                        running = true;
+                    }
+                }
 
-function start2() {
-    ball.setPosition(200, 200);
-    ball.setColor(Color.black);
-    add(ball);
-    sc.setPosition(130, 240);
-    sc.setColor(Color.blue);
-    bricks();
-    makePaddle();
-	mouseMoveMethod(movePaddle);
-	setTimer(draw, timeSpeed);
-}
+                function start2() {
+                    ball.setPosition(200, 200);
+                    ball.setColor(Color.black);
+                    add(ball);
+                    sc.setPosition(130, 240);
+                    sc.setColor(Color.blue);
+                    bricks();
+                    makePaddle();
+                    mouseMoveMethod(movePaddle);
+                    setTimer(draw, timeSpeed);
+                }
 
-function setupGame() {
-    setupInfo.setPosition(10, 200);
-    setupInfo2.setPosition(10, 225);
-    add(setupInfo);
-    add(setupInfo2);
-    setTimer(waitKey, 1);
-}
+                function setupGame() {
+                    setupInfo.setPosition(10, 200);
+                    setupInfo2.setPosition(10, 225);
+                    add(setupInfo);
+                    add(setupInfo2);
+                    setTimer(waitKey, 1);
+                }
 
-function waitKey() {
-    keyDownMethod(checkKey);
-}
+                function waitKey() {
+                    keyDownMethod(checkKey);
+                }
 
-function checkKey(e){
-    if(e.keyCode == Keyboard.letter('e')){
-	    timeSpeed = -1;
-	    easyMode = true;
-	    dx = 12;
-        dy = 12;
-	    start2();
-	    remove(setupInfo);
-	    remove(setupInfo2);
-	}
-	if(e.keyCode == Keyboard.letter('1')){
-	    timeSpeed = 25;
-	    start2();
-	    remove(setupInfo);
-	    remove(setupInfo2);
-	}
-	if(e.keyCode == Keyboard.letter('2')){
-	    timeSpeed = 15;
-	    start2();
-	    remove(setupInfo);
-	    remove(setupInfo2);
-	}
-	if(e.keyCode == Keyboard.letter('3')){
-	    timeSpeed = 5;
-	    start2();
-	    remove(setupInfo);
-	    remove(setupInfo2);
-	}
-	if(e.keyCode == Keyboard.letter('4')){
-	    timeSpeed = -1;
-	    start2();
-	    remove(setupInfo);
-    	remove(setupInfo2);
-	}
-	if(e.keyCode == Keyboard.letter('5')){
-	    timeSpeed = -1;
-        dx = 8;
-        dy = 8;
-	    start2();
-	    remove(setupInfo);
-    	remove(setupInfo2);
-	}
-	if(e.keyCode == Keyboard.letter('6')){
-	    timeSpeed = -1;
-        dx = 16;
-        dy = 16;
-	    start2();
-	    remove(setupInfo);
-    	remove(setupInfo2);
-	}
-	if(e.keyCode == Keyboard.letter('C')){
-	    timeSpeed = -1;
-	    disableFalls = 1;
-	    start2();
-	    remove(setupInfo);
-    	remove(setupInfo2);
-	}
-}
+                function checkKey(e) {
+                    if (e.keyCode == Keyboard.letter('e')) {
+                        timeSpeed = -1;
+                        easyMode = true;
+                        dx = 12;
+                        dy = 12;
+                        start2();
+                        remove(setupInfo);
+                        remove(setupInfo2);
+                    }
+                    if (e.keyCode == Keyboard.letter('1')) {
+                        timeSpeed = 25;
+                        start2();
+                        remove(setupInfo);
+                        remove(setupInfo2);
+                    }
+                    if (e.keyCode == Keyboard.letter('2')) {
+                        timeSpeed = 15;
+                        start2();
+                        remove(setupInfo);
+                        remove(setupInfo2);
+                    }
+                    if (e.keyCode == Keyboard.letter('3')) {
+                        timeSpeed = 5;
+                        start2();
+                        remove(setupInfo);
+                        remove(setupInfo2);
+                    }
+                    if (e.keyCode == Keyboard.letter('4')) {
+                        timeSpeed = -1;
+                        start2();
+                        remove(setupInfo);
+                        remove(setupInfo2);
+                    }
+                    if (e.keyCode == Keyboard.letter('5')) {
+                        timeSpeed = -1;
+                        dx = 8;
+                        dy = 8;
+                        start2();
+                        remove(setupInfo);
+                        remove(setupInfo2);
+                    }
+                    if (e.keyCode == Keyboard.letter('6')) {
+                        timeSpeed = -1;
+                        dx = 16;
+                        dy = 16;
+                        start2();
+                        remove(setupInfo);
+                        remove(setupInfo2);
+                    }
+                    if (e.keyCode == Keyboard.letter('C')) {
+                        timeSpeed = -1;
+                        disableFalls = 1;
+                        start2();
+                        remove(setupInfo);
+                        remove(setupInfo2);
+                    }
+                }
 
-function draw(){
-	checkWalls();
-	checkBricks();
-	ball.move(dx, dy);
-	checkScoreVars();
-	if(easyMode == true) {
-	    paddle.setPosition(ball.getX() - 40, paddle.getY());
-	}
-}
+                function draw() {
+                    checkWalls();
+                    checkBricks();
+                    ball.move(dx, dy);
+                    checkScoreVars();
+                    if (easyMode == true) {
+                        paddle.setPosition(ball.getX() - 40, paddle.getY());
+                    }
+                }
 
-function checkWalls(){
-	if(ball.getX() + ball.getRadius() > getWidth()){
-		dx = -dx;
-	}
-	if(ball.getX() - ball.getRadius() < 0){
-		dx = -dx;
-	}
-	if(ball.getY() + ball.getRadius() > getHeight()){
-        if(disableFalls == 1) {
-            dy = -dy;
-        } else {
-            stopTimer(draw);
-            ball.setPosition(200, 200);
-            running = false;
-            ballFalls++;
-            mouseClickMethod(resume);
-        }
-    }
-	if(ball.getY() - ball.getRadius() < 0){
-		dy = -dy;
-	}
-}
-
-function checkBricks() {
-	var object = getElementAt(ball.getX(), ball.getY());
-	ball.setColor(Color.black);
-	if(object != null && object != ball && object != paddle) {
-	    remove(object);
-	    score++;
-	    dy = -dy;
-	} else if (object == paddle) {
-        dy = -dy;
-    }
-}
-
-function checkScoreVars() {
-    if(ballFalls >= 3) {
-        stopTimer(draw);
-        remove(ball);
-        add(lose);
-        sc.setText("Score: " + score);
-        add(sc);
-    } else if (score == 80) {
-        stopTimer(draw);
-        remove(ball);
-        add(win);
-        sc.setText("Score: " + score);
-        add(sc);
-    }
-}
-
-function makePaddle() {
-    paddle.setPosition(150, getHeight()-(PADDLE_OFFSET + PADDLE_HEIGHT));
-    paddle.setColor(Color.black);
-    add(paddle);
-}
-
-function movePaddle(e) {
-    if(easyMode == true) {
-        // do nothing   
-    } else {
-        var y = paddle.getY();
-        var x = e.getX() - PADDLE_WIDTH/2;
-        paddle.setPosition(x, y);
-    }
-}
-
-function bricks() {
-    var color = Color.red;
-    var x = BRICK_SPACING;
-    var y = BRICK_TOP_OFFSET;
-    for(var i = NUM_ROWS_COLOR; i > 0; i--) {
-        for(var h = NUM_BRICKS_PER_ROW; h > 0; h-- ) {
-            var rect = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT);
-            rect.setColor(color);
-            rect.setPosition(x, y);
-            add(rect);
-            x += BRICK_SPACING + BRICK_WIDTH;
-        }
-        x = BRICK_SPACING;
-        y += jeff;
-        for(var j = NUM_BRICKS_PER_ROW; j > 0; j-- ) {
-            var rect = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT);
-            rect.setColor(color);
-            rect.setPosition(x, y);
-            add(rect);
-            x += BRICK_SPACING + BRICK_WIDTH;
-        }
-        x = BRICK_SPACING;
-        y += jeff
-        if (color == Color.red) {
-            color = Color.orange
-        } else if (color == Color.orange) {
-            color = Color.green
-        } else if (color == Color.green) {
-            color = Color.blue  
-        }
-    }
-}
-
-                        if (typeof start === 'function') {
-                            start();
+                function checkWalls() {
+                    if (ball.getX() + ball.getRadius() > getWidth()) {
+                        dx = -dx;
+                    }
+                    if (ball.getX() - ball.getRadius() < 0) {
+                        dx = -dx;
+                    }
+                    if (ball.getY() + ball.getRadius() > getHeight()) {
+                        if (disableFalls == 1) {
+                            dy = -dy;
+                        } else {
+                            stopTimer(draw);
+                            ball.setPosition(200, 200);
+                            running = false;
+                            ballFalls++;
+                            mouseClickMethod(resume);
                         }
-                    };
-  	</script>
-		<style>
-			canvas {
-    				border: 1px solid black;
-			}
-		</style>
-</head>
-<body>
-<div id="navbar">
-<ul class="nav" id="top">
-    <li class="nav"><a class="active" href="index.html">Home</a></li>
-    <li class="dropdown">
-    <a href="#proj" class="dropbtn">Projects</a>
-    <div class="dropdown-content">
-        <a href="projects/breakout.html">Breakout</a>
-        <a href="projects/popup.html">Popup</a>
-        <a href="projects/crazyball.html">Crazy Ball</a>
-        <a href="projects/js-colorchange.html">JavaScript Color Change</a>
-        <a href="projects/htmltest.html">HTML Test</a>
-        <a href="projects/todolist.html">To Do List</a>
-        <a href="projects/chalkboard.html">Chalkboard</a>
-        <a href="projects/tictactoe.html">Tic Tac Toe</a>
-        <a href="projects/multiplication.html">Multiplication</a>
-    </div>
-  </li>
-    <li class="nav"><a href="bio.html">About</a></li>
-</ul>
-</div>
+                    }
+                    if (ball.getY() - ball.getRadius() < 0) {
+                        dy = -dy;
+                    }
+                }
 
-            
-            
-            
-		<div id="canvasContainer" width="100%" style="width: 100%; height: 100%; overflow: hidden;">
-			<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
-		</div>
-            <a href="../index.html">Return Home</a>
-	</body>
+                function checkBricks() {
+                    var object = getElementAt(ball.getX(), ball.getY());
+                    ball.setColor(Color.black);
+                    if (object != null && object != ball && object != paddle) {
+                        remove(object);
+                        score++;
+                        dy = -dy;
+                    } else if (object == paddle) {
+                        dy = -dy;
+                    }
+                }
+
+                function checkScoreVars() {
+                    if (ballFalls >= 3) {
+                        stopTimer(draw);
+                        remove(ball);
+                        add(lose);
+                        sc.setText("Score: " + score);
+                        add(sc);
+                    } else if (score == 80) {
+                        stopTimer(draw);
+                        remove(ball);
+                        add(win);
+                        sc.setText("Score: " + score);
+                        add(sc);
+                    }
+                }
+
+                function makePaddle() {
+                    paddle.setPosition(150, getHeight() - (PADDLE_OFFSET + PADDLE_HEIGHT));
+                    paddle.setColor(Color.black);
+                    add(paddle);
+                }
+
+                function movePaddle(e) {
+                    if (easyMode == true) {
+// do nothing   
+                    } else {
+                        var y = paddle.getY();
+                        var x = e.getX() - PADDLE_WIDTH / 2;
+                        paddle.setPosition(x, y);
+                    }
+                }
+
+                function bricks() {
+                    var color = Color.red;
+                    var x = BRICK_SPACING;
+                    var y = BRICK_TOP_OFFSET;
+                    for (var i = NUM_ROWS_COLOR; i > 0; i--) {
+                        for (var h = NUM_BRICKS_PER_ROW; h > 0; h--) {
+                            var rect = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT);
+                            rect.setColor(color);
+                            rect.setPosition(x, y);
+                            add(rect);
+                            x += BRICK_SPACING + BRICK_WIDTH;
+                        }
+                        x = BRICK_SPACING;
+                        y += jeff;
+                        for (var j = NUM_BRICKS_PER_ROW; j > 0; j--) {
+                            var rect = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT);
+                            rect.setColor(color);
+                            rect.setPosition(x, y);
+                            add(rect);
+                            x += BRICK_SPACING + BRICK_WIDTH;
+                        }
+                        x = BRICK_SPACING;
+                        y += jeff
+                        if (color == Color.red) {
+                            color = Color.orange
+                        } else if (color == Color.orange) {
+                            color = Color.green
+                        } else if (color == Color.green) {
+                            color = Color.blue
+                        }
+                    }
+                }
+
+                if (typeof start === 'function') {
+                    start();
+                }
+            };
+        </script>
+        <style>
+            canvas {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="navbar">
+            <ul class="nav" id="top">
+                <li class="nav"><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#proj" class="dropbtn">Projects</a>
+                    <div class="dropdown-content">
+                        <a href="projects/breakout.html">Breakout</a>
+                        <a href="projects/popup.html">Popup</a>
+                        <a href="projects/crazyball.html">Crazy Ball</a>
+                        <a href="projects/js-colorchange.html">JavaScript Color Change</a>
+                        <a href="projects/htmltest.html">HTML Test</a>
+                        <a href="projects/todolist.html">To Do List</a>
+                        <a href="projects/chalkboard.html">Chalkboard</a>
+                        <a href="projects/tictactoe.html">Tic Tac Toe</a>
+                        <a href="projects/multiplication.html">Multiplication</a>
+                    </div>
+                </li>
+                <li class="nav"><a href="bio.html">About</a></li>
+                <li class="nav"><a href="sitemap.html">Site Map</a></li>
+            </ul>
+        </div>
+
+
+
+
+        <div id="canvasContainer" width="100%" style="width: 100%; height: 100%; overflow: hidden;">
+            <canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
+        </div>
+        <a href="../index.html">Return Home</a>
+    </body>
 </html>

@@ -23,7 +23,10 @@ function buildTable() {
                     tableData.textContent = th;
                 } else {
                     var tableData = document.createElement("td");
-                    if((cell+1) % 3 == 0){tableData.style.color="#4dc3ff";};
+                    if ((cell + 1) % 3 == 0) {
+                        tableData.style.color = "#4dc3ff";
+                    }
+                    ;
                     var ans = th * cell;
                     tableRow.appendChild(tableData);
                     tableData.textContent = ans;

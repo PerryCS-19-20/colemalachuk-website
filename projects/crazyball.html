@@ -2,70 +2,71 @@
 
 <!doctype html>
 <html>
-	<head>
-            <link rel="stylesheet" type="text/css" href="../css.css">
-		<title>Crazy Ball</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-		<script type="text/javascript" src="https://static.codehs.com/gulp/cb01b4a22ffd3971572a8a1ab9f3b7c4cb17f383/chs-js-lib/chs.js"></script>
-		<script>
-                      window.onload = function() {
-var RADIUS = 100;
-var circle;
-var color;
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css.css">
+        <title>Crazy Ball</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://static.codehs.com/gulp/cb01b4a22ffd3971572a8a1ab9f3b7c4cb17f383/chs-js-lib/chs.js"></script>
+        <script>
+            window.onload = function() {
+                var RADIUS = 100;
+                var circle;
+                var color;
 
-function start(){
-	circle = new Circle(RADIUS);
-	circle.setPosition(getWidth()/2, getHeight()/2);
-	add(circle);
+                function start() {
+                    circle = new Circle(RADIUS);
+                    circle.setPosition(getWidth() / 2, getHeight() / 2);
+                    add(circle);
 
-	setTimer(random, 100);
-}
+                    setTimer(random, 100);
+                }
 
-function random() {
-	var h = Randomizer.nextInt(100, getHeight()-100);
-	var w = Randomizer.nextInt(100, getWidth()-100);
+                function random() {
+                    var h = Randomizer.nextInt(100, getHeight() - 100);
+                    var w = Randomizer.nextInt(100, getWidth() - 100);
 
-	circle.setPosition(h, w);
+                    circle.setPosition(h, w);
 
-	circle.setColor(Randomizer.nextColor());
-}
+                    circle.setColor(Randomizer.nextColor());
+                }
 
-                        if (typeof start === 'function') {
-                            start();
-                        }
-                    };
-  	</script>
-		<style>
-			canvas {
-    				border: 1px solid black;
-			}
-		</style>
-	</head>
-	<body>
-<div id="navbar">
-<ul class="nav" id="top">
-    <li class="nav"><a class="active" href="index.html">Home</a></li>
-    <li class="dropdown">
-    <a href="#proj" class="dropbtn">Projects</a>
-    <div class="dropdown-content">
-        <a href="projects/breakout.html">Breakout</a>
-        <a href="projects/popup.html">Popup</a>
-        <a href="projects/crazyball.html">Crazy Ball</a>
-        <a href="projects/js-colorchange.html">JavaScript Color Change</a>
-        <a href="projects/htmltest.html">HTML Test</a>
-        <a href="projects/todolist.html">To Do List</a>
-        <a href="projects/chalkboard.html">Chalkboard</a>
-        <a href="projects/tictactoe.html">Tic Tac Toe</a>
-        <a href="projects/multiplication.html">Multiplication</a>
-    </div>
-  </li>
-    <li class="nav"><a href="bio.html">About</a></li>
-</ul>
-</div>
+                if (typeof start === 'function') {
+                    start();
+                }
+            };
+        </script>
+        <style>
+            canvas {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="navbar">
+            <ul class="nav" id="top">
+                <li class="nav"><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#proj" class="dropbtn">Projects</a>
+                    <div class="dropdown-content">
+                        <a href="projects/breakout.html">Breakout</a>
+                        <a href="projects/popup.html">Popup</a>
+                        <a href="projects/crazyball.html">Crazy Ball</a>
+                        <a href="projects/js-colorchange.html">JavaScript Color Change</a>
+                        <a href="projects/htmltest.html">HTML Test</a>
+                        <a href="projects/todolist.html">To Do List</a>
+                        <a href="projects/chalkboard.html">Chalkboard</a>
+                        <a href="projects/tictactoe.html">Tic Tac Toe</a>
+                        <a href="projects/multiplication.html">Multiplication</a>
+                    </div>
+                </li>
+                <li class="nav"><a href="bio.html">About</a></li>
+                <li class="nav"><a href="sitemap.html">Site Map</a></li>
+            </ul>
+        </div>
 
-		<div id="canvasContainer" width="100%" style="width: 100%; height: 100%; overflow: hidden;">
-			<canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
-		</div>
-            <a href="../index.html">Return Home</a>
-	</body>
+        <div id="canvasContainer" width="100%" style="width: 100%; height: 100%; overflow: hidden;">
+            <canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
+        </div>
+        <a href="../index.html">Return Home</a>
+    </body>
 </html>
