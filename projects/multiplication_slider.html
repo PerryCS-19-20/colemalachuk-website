@@ -1,13 +1,16 @@
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <title></title>
+        <title>Multiplication Table</title>
         <link rel="stylesheet" type="text/css" href="../css.css">
-        <script src="?????????.js"></script>
+        <script src="multi_slider.js"></script>
+        <style>
+            table, th, td {border: 1px solid black; text-align: center; font-size: 110%; border-collapse: collapse;}
+        </style>
     </head>
-    <body>
-          <div id="navbar">
+    <body  onload="buildTable();">
+        <div id="navbar">
             <ul class="nav" id="top">
                 <li class="nav"><a href="index.html">Home</a></li>
                 <li class="dropdown">
@@ -22,24 +25,16 @@
                         <a href="projects/chalkboard.html">Chalkboard</a>
                         <a href="projects/tictactoe.html">Tic Tac Toe</a>
                         <a href="projects/multiplication.html">Multiplication</a>
-                        <a href="projects/multiplication_slider.html">Multiplication with Sliders</a>
                     </div>
                 </li>
                 <li class="nav"><a href="bio.html">About</a></li>
                 <li class="nav"><a href="sitemap.html">Site Map</a></li>
             </ul>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
+        <h1>Multiplication Table</h1>
+        Table Width: <input type="range" id="tableWidth" min="2" max="21" value="11" onchange="buildTable();"><br>
+        Table Height: <input type="range" id="tableHeight" min="2" max="21" value="11" onchange="buildTable();"><br>
+        
+        
+    </body>
 </html>
