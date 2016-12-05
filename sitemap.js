@@ -3,7 +3,7 @@ function buildMap(id) {
     var ul = document.createElement("ul");
     sitemap.appendChild(ul);
     var index = new Array("Home", "index.html", "About", "bio.html",
-            "Breakout", "breakout.html",
+            "Breakout", "projects/breakout.html",
             "Popup", "projects/popup.html",
             "Crazy Ball", "projects/crazyball.html",
             "JavaScript Color Change", "projects/js-colorchange.html",
@@ -22,7 +22,5 @@ function buildMap(id) {
         i++;
         a.href = index[i];
         li.appendChild(a);
-
-
     }
 }
