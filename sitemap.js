@@ -13,7 +13,9 @@ function buildMap(id) {
             "Tic Tac Toe", "projects/tictactoe.html",
             "Multiplication", "projects/multiplication.html",
             "Multiplication with Sliders", "projects/multiplication_slider.html",
-            "Sitemap", "sitemap.html");
+            "Sitemap", "sitemap.html",
+            "Calculator", "projects/calc.html"
+            );
     for (var i = 0; i < 26; i++) {
         var li = document.createElement("li");
         ul.appendChild(li);
